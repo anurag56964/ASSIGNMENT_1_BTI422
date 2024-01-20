@@ -1,3 +1,14 @@
+/*********************************************************************************
+*  WEB422 – Assignment 1
+*  I declare that this assignment is my own work in accordance with Seneca  Academic Policy.  
+*  No part of this assignment has been copied manually or electronically from any other source
+*  (including web sites) or distributed to other students.
+* 
+*  Name: ___ANURAG DAS_____ Student ID: __126031228__ Date: ____Jan 19th 2024___
+*  Cyclic Link: ___________https://electric-blue-beetle-tie.cyclic.app__________________
+*
+********************************************************************************/ 
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
