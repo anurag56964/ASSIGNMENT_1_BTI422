@@ -49,7 +49,7 @@ app.get('/api/movies', async (req, res) => {
         res.json(movies);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: 'Internal Server Error0000' });
     }
 });
 
