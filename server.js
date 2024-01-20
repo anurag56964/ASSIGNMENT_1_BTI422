@@ -14,6 +14,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config();
+
 const app = express();
 const port = process.env.PORT || 8080;
 const MoviesDB = require("./modules/moviesDB.js");
@@ -36,7 +37,6 @@ app.post('/api/movies', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
 
 app.get('/api/movies', async (req, res) => {
     try {
@@ -71,23 +71,21 @@ app.get('/api/movies/:id', async (req, res) => {
 
 app.put('/api/movies/:id', async (req, res) => {
     try {
-        const { id: movieId } = req.params;
-        const { body: updatedData } = req;
+        const movieId = req.params.id;
+        const updatedData = req.body;
 
         const result = await db.updateMovieById(updatedData, movieId);
 
-        const responseMessage = result.nModified === 1
-            ? { message: 'Movie updated successfully' }
-            : { error: 'Movie not found or not updated' };
-
-        res.status(result.nModified === 1 ? 200 : 404).json(responseMessage).send();
-
+        if (result.nModified === 1) {
+            res.json({ message: 'Movie updated successfully' });
+        } else {
+            res.status(404).json({ error: 'Movie not found or not updated' });
+        }
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
 
 app.delete('/api/movies/:id', async (req, res) => {
     try {
@@ -113,4 +111,11 @@ db.initialize(process.env.MONGODB_CONN_STRING).then(() => {
 }).catch((err) => {
     console.log(err);
 });
+
+
+/*
+app.listen(port, () => {
+    console.log(`Server is running at http://localhost:${port}`);
+});
+*/
 
